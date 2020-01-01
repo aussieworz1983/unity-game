@@ -11,47 +11,59 @@ public class Player : MonoBehaviour
     public GameObject playerObj;
     
     
+    
+    
     // Start is called before the first frame update
     void Start()
-    {
-       isDead=false;
-       ships=3;
+    {  
        maxHealth=100;
        health=maxHealth;
+       isDead=false;
+       ships=3;
+      
        playerObj=transform.GetChild(0).gameObject;
-       
+       StartCoroutine(MyUpdate());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(health<=0){
-            Debug.Log("Player Dead");
-            isDead=true;
-            IsDead();
-        }
+      
     }
     void IsDead(){
      
      playerObj.SetActive(false);
      health=maxHealth;
-     ships = -1;
-      if(isDead==true){
-         StartCoroutine(RespawnWait());
-        
-      }
+     ships -= 1;
      
-     
-
+     StartCoroutine(RespawnWait());
     }
-    void Damage (int damage ){
-        health = -damage;
+    public void Damage (int damage ){
+        if(!isDead){
+            health = -damage;
+         }
+        
     }
     IEnumerator RespawnWait(){
        
-      yield  return new WaitForSeconds(5);     
+       yield  return new WaitForSeconds(2);     
        playerObj.SetActive(true);
        isDead=false;
+      
+     }
+     IEnumerator MyUpdate(){
+      while(!isDead){
+        Debug.Log("my update");
+         if(health<=0&&isDead==false){
+            Debug.Log("Player Dead");
+            isDead=true;
+            IsDead();
+        }
+      yield  return new WaitForSeconds(0.1f); 
+     }
+        
+          
+     
       
      }
     

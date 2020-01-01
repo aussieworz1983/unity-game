@@ -9,8 +9,10 @@ public class PlayerWeaponManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(weapon[0]==null){
+         weapon[0]=transform.GetChild(1).GetComponent<Weapon>();
+        }
         
-        weapon[0]=transform.GetChild(1).GetComponent<Weapon>();
     }
 
     // Update is called once per frame
