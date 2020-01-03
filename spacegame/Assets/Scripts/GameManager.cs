@@ -6,15 +6,21 @@ public class GameManager : MonoBehaviour
 {
      
     public static GameManager SharedInstance;
+ 
     private GameObject player;
     private Player playerScript;
+    public Gui gui;
     public int playerShips;
     public bool paused;
     public float playerScore;
     public int shotsMissed;
     public int shotsFired;
+    public int shotsHit;
     public bool isPaused;
-    public double playerCash; 
+    public double playerCash;
+    public double cashLost;
+    public float time;
+    
     
     
     
@@ -31,6 +37,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        time=Time.time;
         playerShips=playerScript.ships;
         
         if(playerShips<=0){
@@ -53,5 +60,8 @@ public class GameManager : MonoBehaviour
     void ContinueGame(){
        isPaused=false;
        Time.timeScale = 1;
+     }
+    public void UpdateGui(){
+       gui.UpdateGui();
      }
 }

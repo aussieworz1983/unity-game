@@ -16,11 +16,11 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {  
-       maxHealth=100;
+      
+      maxHealth=100;
        health=maxHealth;
        isDead=false;
        ships=3;
-      
        playerObj=transform.GetChild(0).gameObject;
        StartCoroutine(MyUpdate());
     }
@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
      playerObj.SetActive(false);
      health=maxHealth;
      ships -= 1;
-     
+     GameManager.SharedInstance.cashLost += 50;
+     GameManager.SharedInstance.UpdateGui();
      StartCoroutine(RespawnWait());
     }
     public void Damage (int damage ){

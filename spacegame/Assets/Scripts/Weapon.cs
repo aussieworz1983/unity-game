@@ -26,6 +26,8 @@ public class Weapon : MonoBehaviour
             nextFire = Time.time + fireRate;
             AudioOneShot();
             Fire();
+            GameManager.SharedInstance.shotsFired += 1;
+            
             
        }
         

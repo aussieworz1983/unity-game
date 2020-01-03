@@ -21,6 +21,8 @@ void Start()
     {
      if(other.gameObject.tag=="Hazard"){
      GameManager.SharedInstance.playerCash += 5;
+     GameManager.SharedInstance.shotsHit += 5;
+      GameManager.SharedInstance.UpdateGui();
      other.gameObject.SetActive(false);
      this.gameObject.SetActive(false);
       }
