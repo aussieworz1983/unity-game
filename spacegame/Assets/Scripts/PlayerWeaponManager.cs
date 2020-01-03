@@ -19,7 +19,7 @@ public class PlayerWeaponManager : MonoBehaviour
     void Update()
     {
         if(Input.GetKey("f")){
-          Debug.Log("shoot");
+         
           weapon[0].Shoot();
         }
     }

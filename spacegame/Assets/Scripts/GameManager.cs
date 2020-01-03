@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject player;
-    public Player playerScript;
+     
+    public static GameManager SharedInstance;
+    private GameObject player;
+    private Player playerScript;
     public int playerShips;
     public bool paused;
+    public float playerScore;
+    public int shotsMissed;
+    public int shotsFired;
+    public bool isPaused;
+    public double playerCash; 
+    
+    
     
     // Start is called before the first frame update
     void Start()
     {
+       
+       SharedInstance = this;
        player= GameObject.FindWithTag("Player"); 
        playerScript=player.transform.GetComponent<Player>();
        
@@ -26,10 +37,21 @@ public class GameManager : MonoBehaviour
           	Debug.Log("Game Over");
         }
     }
+    void FixedUpdate(){
+         if(isPaused==true&&Input.GetKey("c")){
+           ContinueGame();
+           
+         }
+         if(Input.GetKey("p")){
+           PauseGame();
+         }
+    }
     void PauseGame(){
+       isPaused=true;
        Time.timeScale = 0;
      }
     void ContinueGame(){
+       isPaused=false;
        Time.timeScale = 1;
      }
 }

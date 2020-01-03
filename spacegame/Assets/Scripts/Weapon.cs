@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
     public float fireRate = 0.5F;
     private float nextFire = 0.0F;
     public GameObject projectile;
+    public Transform muzzle;
     public AudioClip shotSound;
     AudioSource audioSource;
     // Start is called before the first frame update
@@ -24,11 +25,21 @@ public class Weapon : MonoBehaviour
        if(Time.time > nextFire){
             nextFire = Time.time + fireRate;
             AudioOneShot();
-            Debug.Log("Weapon shot");
+            Fire();
+            
        }
         
     }
     public void AudioOneShot(){
         audioSource.PlayOneShot(shotSound);
+    }
+    public void Fire(){
+          projectile = ObjectPool.SharedInstance.GetPooledObject("PlayerBullet"); 
+         if (projectile != null) {
+            projectile.transform.position = muzzle.transform.position;
+            projectile.transform.rotation = muzzle.transform.rotation;
+            projectile.SetActive(true);
+          }
+             //bullet.GetComponent<Rigidbody>().AddForce(transform.forward * 10);
     }
 }

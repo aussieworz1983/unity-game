@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Hazard : MonoBehaviour
 {
-
+    
+    
     public int damage;
-    public BoxCollider collider;
+    
     bool hit;
     // Start is called before the first frame update
     void Start()
     {
        hit=false;
        damage=100;
-       collider = transform.GetComponent<BoxCollider>();
+       
     }
 
     // Update is called once per frame
@@ -22,18 +23,22 @@ public class Hazard : MonoBehaviour
         
     }
     private void OnTriggerEnter(Collider other)
-    {
-                        
- 
-            if(other.gameObject.transform.parent.gameObject.tag==("Player")&&hit==false){
+    {        
+            if(other){
+               if(other.gameObject.transform.parent.gameObject.tag==("Player")&&hit==false){
                hit=true;
                GameObject player = other.gameObject.transform.parent.gameObject;
                Player playerScript = player.GetComponent<Player>();
-               playerScript.Damage(damage);
-               
-                 Debug.Log("Player Hit");
+               playerScript.Damage(damage);    
+               }else if(other.gameObject.tag==("PlayerBullet")){
+
+               Debug.Log("Bullet Hit");
+               } else{
+                 Debug.Log("Hazard hit "+other);
+               }            
+            Destroy(this.gameObject);
             }
-            Destroy(gameObject);
+           
         
-    }
+           }
 }

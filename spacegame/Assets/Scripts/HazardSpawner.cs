@@ -8,7 +8,9 @@ public class HazardSpawner : MonoBehaviour
      public GameObject hazard;
      public Vector3 spawnValues;
      public int hazardCount;
-     public int waitTime;
+     public float spawnWaitTime;
+     public float startWait;
+     public float waveWait;
  
      void SpawnWaves() {
          
@@ -25,13 +27,26 @@ public class HazardSpawner : MonoBehaviour
          SpawnWaves ();
      }
         IEnumerator SpawnTimer(){
-        while(hazardCount>=0){
-       Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValues.x, spawnValues.x),spawnValues.y,spawnValues.z);
-       Quaternion spawnRotation = Quaternion.identity;
-       Instantiate (hazard, spawnPosition, spawnRotation);
-       hazardCount -= 1;
-       yield return new WaitForSeconds(waitTime);
-         }
+        yield return new WaitForSeconds(startWait);
+        while(true){
+      for(int i = 0; i < hazardCount; i++){
+          Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValues.x, spawnValues.x),spawnValues.y,spawnValues.z);
+          Quaternion spawnRotation = Quaternion.identity;
+          hazard = ObjectPool.SharedInstance.GetPooledObject("Hazard");
+       
+         hazard.transform.position = spawnPosition;
+         hazard.transform.rotation = spawnRotation;
+         hazard.SetActive(true);
+         
+       
+      yield return new WaitForSeconds(spawnWaitTime);
+      }
+       
+       yield return new WaitForSeconds(waveWait);
+      }
+     
+       
+         
        
      }
 }

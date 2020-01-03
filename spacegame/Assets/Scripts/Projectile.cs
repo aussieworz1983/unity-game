@@ -10,10 +10,21 @@ public class Projectile : MonoBehaviour
 void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.AddRelativeForce(Vector3.forward * force);
     }
 
     void FixedUpdate()
     {
-        rb.AddRelativeForce(Vector3.forward * force);
+        
+    }
+ private void OnTriggerEnter(Collider other)
+    {
+     if(other.gameObject.tag=="Hazard"){
+     GameManager.SharedInstance.playerCash += 5;
+     other.gameObject.SetActive(false);
+     this.gameObject.SetActive(false);
+      }
+    
+    
     }
 }

@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
      }
      IEnumerator MyUpdate(){
       while(!isDead){
-        Debug.Log("my update");
+        
          if(health<=0&&isDead==false){
             Debug.Log("Player Dead");
             isDead=true;
