@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Hazard
   - PlayerBullet
+  - PickUp
+  - Weapon
+  - Enemy
   layers:
   - Default
   - TransparentFX

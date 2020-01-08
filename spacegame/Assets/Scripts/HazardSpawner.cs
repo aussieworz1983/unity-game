@@ -33,10 +33,14 @@ public class HazardSpawner : MonoBehaviour
           Vector3 spawnPosition = new Vector3 (Random.Range(-spawnValues.x, spawnValues.x),spawnValues.y,spawnValues.z);
           Quaternion spawnRotation = Quaternion.identity;
           hazard = ObjectPool.SharedInstance.GetPooledObject("Hazard");
-       
-         hazard.transform.position = spawnPosition;
+         if(hazard!=null){
+
+           hazard.transform.position = spawnPosition;
          hazard.transform.rotation = spawnRotation;
          hazard.SetActive(true);
+
+         }
+        
          
        
       yield return new WaitForSeconds(spawnWaitTime);

@@ -43,9 +43,7 @@ public class GameManager : MonoBehaviour
         if(playerShips<=0){
           	Debug.Log("Game Over");
         }
-    }
-    void FixedUpdate(){
-         if(isPaused==true&&Input.GetKey("c")){
+         if(Input.GetKey("c")){
            ContinueGame();
            
          }
@@ -53,15 +51,25 @@ public class GameManager : MonoBehaviour
            PauseGame();
          }
     }
+    void FixedUpdate(){
+        
+    }
     void PauseGame(){
        isPaused=true;
        Time.timeScale = 0;
+       gui.PauseScreen();
      }
     void ContinueGame(){
        isPaused=false;
        Time.timeScale = 1;
+       gui.ContinueGame();
      }
     public void UpdateGui(){
        gui.UpdateGui();
      }
+    public void AddPlayerCash(double cash){
+        playerCash+=cash;
+        gui.UpdateGui();
+    }
+  
 }
