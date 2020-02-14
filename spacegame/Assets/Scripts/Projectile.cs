@@ -31,9 +31,13 @@ void Start()
        this.gameObject.SetActive(false);
       }
      if(other.gameObject.tag=="Enemy"){
-        Enemy enemy = other.gameObject.GetComponent<Enemy>();
-        enemy.Damage(damage);
-      }
+                Enemy enemy = other.gameObject.GetComponent<Enemy>();
+                if (enemy==null) {
+                     enemy = other.gameObject.GetComponentInParent<Enemy>();
+                }
+                enemy.Damage(damage);
+                this.gameObject.SetActive(false);
+            }
 
        }
   

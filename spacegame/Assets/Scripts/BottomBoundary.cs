@@ -17,8 +17,8 @@ public class BottomBoundary : MonoBehaviour
     }
      private void OnTriggerEnter(Collider other)
     {
-            if(other.gameObject.tag==("Hazard")){
-              other.gameObject.SetActive(false);
-            } 
+        if (other!=null) {
+            other.gameObject.SetActive(false);
+        }
     }
 }
