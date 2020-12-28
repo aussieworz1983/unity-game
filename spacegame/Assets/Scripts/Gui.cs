@@ -48,7 +48,7 @@ public class Gui : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       timeText.text="Time Played: " +GameManager.SharedInstance.time;
+       timeText.text="Time Expired : " +GameManager.SharedInstance.time;
     }
     public void UpdateGui(){
         StartCoroutine(Wait());
@@ -58,8 +58,8 @@ public class Gui : MonoBehaviour
        yield return new WaitForSeconds(1);
        shipsText.text="Ships: " +GameManager.SharedInstance.playerShips;
         scoreText.text="Score: " +GameManager.SharedInstance.playerScore;
-        cashText.text="Cash: " +GameManager.SharedInstance.playerCash;
-        mercCostText.text="Cost: " +GameManager.SharedInstance.cashLost;
+        cashText.text="Earnings: " +GameManager.SharedInstance.playerCash;
+        mercCostText.text="Expense: " +GameManager.SharedInstance.cashLost;
      }
      public void PauseScreen (){
         centerText.text="Game Is Paused Press C To Continue q to quit";

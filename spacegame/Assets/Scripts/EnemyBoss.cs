@@ -10,11 +10,13 @@ public class EnemyBoss : Enemy
     public Boundary boundary;
    
     public GameObject laserRay;
-    public GameObject forceField;
-
+    public GameObject enemyForceField;
+    public bool moveRight = false;
+    Rigidbody rb;
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         laserRay.SetActive(false);
         health = 5000;
         enemyShieldHealth = 5000;
@@ -26,27 +28,34 @@ public class EnemyBoss : Enemy
     // Update is called once per frame
     void Update()
     {
-        if (enemyShieldHealth96*+-) {
+        Debug.Log(transform.position.z+targetPos.z);
+        if (enemyShieldHealth<=0) {
         
           }
+       
+
+        }
+    void FixedUpdate() {
         if (transform.position.z <= targetPos.z)
         {
             speed = 0;
-            if (moving==false) {
+            if (moving == false)
+            {
                 StartCoroutine(Movement());
-                moving = true;
+                //moveRight = false;
+                Debug.Log(transform.position.z);
             }
 
 
         }
         else
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - speed);
+            rb.MovePosition(transform.position + transform.forward * Time.fixedDeltaTime);
         }
 
     }
     IEnumerator Movement() {
-        bool moveRight = false;
+        
         while (true) {
             speed = 0.1f;
 
@@ -61,17 +70,18 @@ public class EnemyBoss : Enemy
             }
             if (moveRight == true) {
                 speed = 0.09f;
-                transform.position = new Vector3(transform.position.x + speed, transform.position.y, transform.position.z);
+                rb.MovePosition(transform.position + -transform.right * Time.fixedDeltaTime);
             }
             else {
                 speed = 0.09f;
-                transform.position = new Vector3(transform.position.x - speed, transform.position.y, transform.position.z);
+                
+                rb.MovePosition(transform.position + transform.right * Time.fixedDeltaTime);
             }
+            
 
 
 
-
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.00f);
         }
       
    }
